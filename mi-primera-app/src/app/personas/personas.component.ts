@@ -15,8 +15,4 @@ agregarPersona(){
 this.mensaje = 'Persona Agregada';
 }
 
-modificarTitulo(event: Event){
-  console.log('Entrando a modo modificar titulo.');
-  this.titulo = (<HTMLInputElement>event.target).value;
-}
 }
