@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-persona',
@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonaComponent  {
 
-  constructor() { }
+ nombre: string = 'Juan';
+ apellido: string = 'Pérez';
+ edad: number = 28;
+ /*private edad: number = 28;
+
+ getEdad():number{
+  return this.edad;
+ }*/
 
 }
