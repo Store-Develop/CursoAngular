@@ -1,16 +1,11 @@
-<form class="row">
-    <div class="form-group col-md-2">
-        <!--<label for="nombre" >Nombre:</label>-->
-        <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" #nombreInput/>
-    </div>
+<form class="item">
 
-    <div class="form-group col-md-2">
-        <!--<label for="nombre" >Apellido:</label>-->
-        <input type="text" name="apellido" id="apellido" placeholder="Apellido" class="form-control" #apellidoInput/>
-    </div>
-    <div class="col">
-        <button type="submit" class="btn btn-primary" (click)="agregarPersona()">
-      Agregar
-      </button>
-    </div>
+    <input type="text" name="nombre" id="nombre" placeholder="Nombre" [(ngModel)]="nombreInput" />
+
+
+    <input type="text" name="apellido " id="apellido " placeholder="Apellido " [(ngModel)]="apellidoInput" />
+
+    <button type="submit " class="btn btn-primary " (click)="agregarPersona() ">
+      +
+    </button>
 </form>
