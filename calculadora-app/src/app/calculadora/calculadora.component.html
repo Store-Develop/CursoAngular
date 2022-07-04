@@ -1,31 +1,27 @@
-<div class="container">
-    <h1>{{ titulo }}</h1>
-    <form>
-        <div class="form-group">
-            <label>Operando A</label>
-            <input type="number" class="form-control" placeholder="Escribe operandoA" [(ngModel)]="operandoA" name="operandoA" />
-        </div>
+<form>
+    <div class="form-group">
+        <label>Operando A</label>
+        <input type="number" class="form-control" placeholder="Escribe operandoA" [(ngModel)]="operandoA" name="operandoA" />
+    </div>
 
-        <div class="form-group">
-            <label>Operando B</label>
-            <input type="number" class="form-control" placeholder="Escribe operandoB" [(ngModel)]="operandoB" name="operandoB" />
-        </div>
+    <div class="form-group">
+        <label>Operando B</label>
+        <input type="number" class="form-control" placeholder="Escribe operandoB" [(ngModel)]="operandoB" name="operandoB" />
+    </div>
 
-        <button type="submit" class="btn btn-primary" (click)="sumar()" style="margin-right:5px; margin-top: 10px;">
+    <button type="submit" class="btn btn-primary" (click)="sumar()" style="margin-right:5px; margin-top: 10px;">
         Sumar
         </button>
 
-        <button type="submit" class="btn btn-primary" (click)="restar()" style="margin-right:5px; margin-top: 10px;">
+    <button type="submit" class="btn btn-primary" (click)="restar()" style="margin-right:5px; margin-top: 10px;">
         Restar
         </button>
 
-        <button type="submit" class="btn btn-primary" (click)="multiplicar()" style="margin-right:5px; margin-top: 10px;">
+    <button type="submit" class="btn btn-primary" (click)="multiplicar()" style="margin-right:5px; margin-top: 10px;">
           Multiplicar
           </button>
 
-        <button type="submit" class="btn btn-primary" (click)="dividir()" style="margin-right:5px; margin-top: 10px;">
+    <button type="submit" class="btn btn-primary" (click)="dividir()" style="margin-right:5px; margin-top: 10px;">
           Dividir
             </button>
-    </form>
-    <p>Resultado: {{ resultado }}</p>
-</div>
+</form>
