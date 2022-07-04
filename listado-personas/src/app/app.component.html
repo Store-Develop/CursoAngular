@@ -22,15 +22,10 @@
             </button>
         </div>
     </form>
-</div>
-
-<div class="container">
     <hr/>
-    <div class="row">
-        <div class="col">
-            <div *ngFor="let persona of personas; let i = index">
-                {{ i + 1 }}: {{ persona.nombre }} {{ persona.apellido }}
-            </div>
-        </div>
-    </div>
+
+    <app-persona *ngFor="let persona of personas; let i = index" [persona]="persona" [i]="i">
+
+
+    </app-persona>
 </div>
