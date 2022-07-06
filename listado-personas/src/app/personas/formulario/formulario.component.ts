@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild, } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoggingService } from '../../LoggingService.service';
 import { Persona } from '../../persona.model';
 import { PersonasService } from '../../personas.service';
@@ -14,14 +15,15 @@ export class FormularioComponent {
   nombreInput:string = '';
  apellidoInput:string = '';
 
- constructor(private LoggingService:LoggingService, private PersonasService: PersonasService){
+ constructor(private LoggingService:LoggingService, private PersonasService: PersonasService, private router: Router){
   this.PersonasService.saludar.subscribe((i:number)=> alert("El indice es: " + i));
  }
 
-  agregarPersona(){
+onGuardarPersona(){
     let persona1 = new Persona(this.nombreInput, this.apellidoInput);
     //this.LoggingService.enviaMensajeAConsola('Enviamos persona con ' +'Nombre:'+ persona1.nombre + ' Apellido: '+ persona1.apellido);
     //this.personaCreada.emit(persona1);
     this.PersonasService.agregarPersona(persona1);
+this.router.navigate(['personas']);
   }
 }
