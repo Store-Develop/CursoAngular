@@ -47,4 +47,12 @@ onGuardarPersona(){
     this.PersonasService.agregarPersona(persona1);
 this.router.navigate(['personas']);
   }
+
+eliminarPersona(){
+  if(this.i != null){
+    this.PersonasService.eliminarPersona(this.i);
+  }
+  this.router.navigate(['personas']);
+}
+
 }

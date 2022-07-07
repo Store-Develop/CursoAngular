@@ -24,4 +24,8 @@ return persona;
     persona1.nombre = persona.nombre;
     persona1.apellido = persona.apellido;
 }
+
+eliminarPersona(i: number){
+  this.personas.slice(i, 1);
+}
 }
