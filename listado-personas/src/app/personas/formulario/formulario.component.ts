@@ -13,8 +13,9 @@ export class FormularioComponent implements OnInit{
 
 
   nombreInput:string = '';
- apellidoInput:string = '';
- i:number;
+  apellidoInput:string = '';
+  i:number;
+   modoEdicion:number;
 
  constructor(private LoggingService:LoggingService,
   private PersonasService: PersonasService,
@@ -28,7 +29,8 @@ export class FormularioComponent implements OnInit{
 
  ngOnInit(){
 this.i = this.route.snapshot.params["id"];
-if(this.i){
+this.modoEdicion = +this.route.snapshot.queryParams['modoEdicion'];
+if(this.modoEdicion != null && this.modoEdicion === 1){
   let persona: Persona = this.PersonasService.encontrarPersona(this.i);
   this.nombreInput = persona.nombre;
   this.apellidoInput = persona.apellido;
@@ -37,7 +39,7 @@ if(this.i){
 
 onGuardarPersona(){
     let persona1 = new Persona(this.nombreInput, this.apellidoInput);
-    if(this.i){
+    if(this.modoEdicion != null && this.modoEdicion === 1){
       this.PersonasService.modificarPersona(this.i, persona1);
     }else{
       this.PersonasService.agregarPersona(persona1);
