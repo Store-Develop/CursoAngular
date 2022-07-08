@@ -46,11 +46,10 @@ onGuardarPersona(){
     }
     //this.LoggingService.enviaMensajeAConsola('Enviamos persona con ' +'Nombre:'+ persona1.nombre + ' Apellido: '+ persona1.apellido);
     //this.personaCreada.emit(persona1);
-    this.PersonasService.agregarPersona(persona1);
 this.router.navigate(['personas']);
   }
 
-eliminarPersona(){
+  eliminarPersona(){
   if(this.i != null){
     this.PersonasService.eliminarPersona(this.i);
   }
