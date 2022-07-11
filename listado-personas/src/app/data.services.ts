@@ -21,4 +21,15 @@ guardarPersonas(personas: Persona[]){
 
   );
 }
+
+modificarPersona(i:number, persona: Persona){
+  let url: string;
+  url ='https://listado-personas-cd3a0-default-rtdb.firebaseio.com/datos' + i + '.json';
+  this.httpClient.put(url, persona)
+  .subscribe(
+    response => console.log('resultado modificar Persona: ' + response),
+    error => console.log('Error en modificar Persona: ' + error)
+    )
+
+}
 }

@@ -37,6 +37,7 @@ return persona;
     let persona1 = this.personas[i];
     persona1.nombre = persona.nombre;
     persona1.apellido = persona.apellido;
+    this.dataServices.modificarPersona(i, persona);
 }
 
 eliminarPersona(i: number){
