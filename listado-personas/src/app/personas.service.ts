@@ -1,46 +1,66 @@
-import { EventEmitter, Injectable } from "@angular/core";
-import { DataServices } from "./data.services";
-import { LoggingService } from "./LoggingService.service";
-import { Persona } from "./persona.model";
+import { Persona } from './persona.model';
+import { LoggingService } from './LoggingService.service';
+import { Injectable } from '@angular/core';
+import { DataService } from './data.service';
 
 @Injectable()
 export class PersonasService{
-  personas: Persona[] = [];
+    personas: Persona[] = [];
 
-  saludar = new EventEmitter<number>();
+    constructor(private loggingService: LoggingService,
+                private dataService: DataService
+        ){}
 
-  constructor(private LoggingService: LoggingService, private dataServices: DataServices){}
-
-  setPersonas(personas: Persona[]){
-    this.personas = personas;
-  }
-
-  obtenerPersonas(){
-    return this.dataServices.cargarPersonas();
-  }
-  agregarPersona(persona: Persona){
-    this.LoggingService.enviaMensajeAConsola('Agregamos persona con Nombre: ' + persona.nombre);
-    if(this.personas == null){
-      this.personas = null;
+    //Lo usamos para iniciar el arreglo, ya que ya es asincrono desde la BD
+    //Se inicializa desde el compoente PersonasComponent    
+    setPersonas(personas: Persona[]){
+        this.personas = personas;
     }
-    this.personas.push(persona);
-    this.dataServices.guardarPersonas(this.personas);
 
-  }
+    obtenerPersonas(){
+        return this.dataService.cargarPersonas();
+    }
 
-  encontrarPersona(index: number){
-let persona: Persona = this.personas[index];
-return persona;
-  }
+    agregarPersona(persona: Persona){
+        this.loggingService.enviaMensajeAConsola("agregamos persona:" + persona.toString());
+        if(this.personas == null){
+            this.personas = [];            
+        }
+        this.personas.push(persona);
+        this.dataService.guardarPersonas(this.personas);
+        //Si se guarda solo un elemento se debe trabajar cada indice y regenerarlos con cada modificacion
+        //this.dataService.guardarPersona(persona, this.personas.length);
 
-  modificarPersona(i: number, persona:Persona){
-    let persona1 = this.personas[i];
-    persona1.nombre = persona.nombre;
-    persona1.apellido = persona.apellido;
-    this.dataServices.modificarPersona(i, persona);
-}
+    }
 
-eliminarPersona(i: number){
-  this.personas.slice(i, 1);
-}
+    encontrarPersona(index:number){
+        let persona:Persona = this.personas[index];
+        this.loggingService.enviaMensajeAConsola("persona encontrada:" + persona.toString());
+        return persona;
+    }
+
+    modificarPersona(index:number, persona:Persona){
+        this.loggingService.enviaMensajeAConsola("persona a modificar:" + persona.toString() + " con indice:" + index);
+        let persona1 = this.personas[index];
+        persona1.nombre = persona.nombre;
+        persona1.apellido = persona.apellido;
+        this.dataService.modificarPersona(index, persona);
+
+    }
+
+    modificarPersonas(){
+        this.loggingService.enviaMensajeAConsola("modificar todas las personas:");
+        if(this.personas != null)
+            //Guarda todas las personas nuevamente para regenerar indicess
+            this.dataService.guardarPersonas(this.personas);
+      
+    }
+
+    eliminarPersona(index:number){
+        this.loggingService.enviaMensajeAConsola("eliminar persona con indice: " + index); 
+        this.personas.splice(index,1);
+        this.dataService.eliminarPersona(index);
+        //Se vuelven a guardar todas las personas para que coincida el indice con el arreglo en memoria
+        this.modificarPersonas();
+    }
 }

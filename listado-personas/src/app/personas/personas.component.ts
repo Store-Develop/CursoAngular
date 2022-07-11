@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoggingService } from '../LoggingService.service';
 import { Persona } from '../persona.model';
+import { LoggingService } from '../LoggingService.service';
 import { PersonasService } from '../personas.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-personas',
@@ -12,22 +13,28 @@ import { PersonasService } from '../personas.service';
 export class PersonasComponent implements OnInit {
 
   personas: Persona[] = [];
-
-  constructor(private LoggingService: LoggingService, private PersonasService: PersonasService, private router: Router){}
-
-  ngOnInit(): void {
-      this.PersonasService.obtenerPersonas()
+  
+  constructor(private loggingService: LoggingService,
+              private personasService: PersonasService,
+              private router: Router,
+              private route:ActivatedRoute
+              ){}
+    
+    ngOnInit(): void {
+      this.personasService.obtenerPersonas()
       .subscribe(
-       (personas: Persona[]) => {
+        (personas: Persona[]) => {
+          //Cargamos los datos de la base de datos al arreglo de personas local 
           this.personas = personas;
-          this.PersonasService.setPersonas(personas);
-      }
-    );
-  }
+          this.personasService.setPersonas(this.personas);
+          console.log("obtener personas suscriber:" + this.personas);
+        }
+      );
+      
+    }
 
-  agregar(){
-   this.router.navigate(['personas/agregar']);
-  }
-
-
+    irAgregar(){
+      console.log("nos vamos a agregar ");
+      this.router.navigate(['./personas/agregar'],{queryParams:{modoEdicion:0}});
+    }
 }
