@@ -8,6 +8,10 @@ import { Persona } from './persona.model';
 export class DataServices{
 constructor (private httpClient: HttpClient){}
 
+cargarPersonas(){
+  return this.httpClient.get('https://listado-personas-cd3a0-default-rtdb.firebaseio.com/datos.json');
+}
+
 //Guardar personas
 guardarPersonas(personas: Persona[]){
   this.httpClient.put('https://listado-personas-cd3a0-default-rtdb.firebaseio.com/datos.json', personas)
